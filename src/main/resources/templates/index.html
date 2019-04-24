@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"/>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #63B174">
+        <div class="collapse navbar-collapse" id="navbar1">
+            <ul class="nav nav-pills flex-column flex-sm-row sticky-top justify-content-around" >
+
+
+                <li class="nav-item">
+                    <a class="nav-link text-sm-center flex-sm p-3 mb-2 text-white nav-bar-text-user" href="/">Аэропорты</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-sm-center flex-sm p-3 mb-2 text-white nav-bar-text-user" href="#" role="button" aria-haspopup="true" aria-expanded="false">В пути</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link text-sm-center flex-sm p-3 mb-2 text-white nav-bar-text-user" href="#">-</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Название</th>
+            <th scope="col">Местоположение</th>
+            <th scope="col">ИАТА</th>
+            <th scope="col">ИКАО</th>
+            <th scope="col">Самолёты</th>
+        </tr>
+        </thead>
+        <tbody>
+        <th:block th:each="airport : ${airports}">
+        <tr>
+            <th scope="row" th:text="${airport.id}"></th>
+            <td th:text="${airport.name}"></td>
+            <td th:text="${airport.city}"></td>
+            <td th:text="${airport.codeIata}"></td>
+            <td th:text="${airport.codeIkao}"></td>
+            <td>
+                <a th:href="@{'/planes?id=' + ${airport.id}}">Самолёты</a>
+            </td>
+        </tr>
+        </th:block>
+
+        </tbody>
+    </table>
+    <br/>
+
+    <h4 class="text-center">Добавить аэропорт</h4>
+    <br/>
+
+    <form class="col-4" action="#" th:action="@{/addAirport}" th:object="${airport}" method="post">
+        <div class="form-group">
+            <label for="inputName">Название Аэропорта</label>
+            <input type="text" class="form-control" id="inputName" placeholder="Name" th:field="*{name}">
+        </div>
+        <div class="form-group">
+            <label for="inputCity">Местоположение</label>
+            <input type="text" class="form-control" id="inputCity" placeholder="Location" th:field="*{city}">
+        </div>
+        <div class="form-group">
+            <label for="inputIata">ИАТА</label>
+            <input type="text" class="form-control" id="inputIata" placeholder="IATA" th:field="*{codeIata}">
+        </div>
+        <div class="form-group">
+            <label for="inputIkao">ИКАО</label>
+            <input type="text" class="form-control" id="inputIkao" placeholder="IKAO" th:field="*{codeIkao}">
+        </div>
+        <button type="submit" class="btn btn-primary">Добавить</button>
+    </form>
+
+    <br/>
+    <br/>
+    <br/>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</body>
+</html>

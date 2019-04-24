@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Planes</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"/>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #63B174">
+    <div class="collapse navbar-collapse" id="navbar1">
+        <ul class="nav nav-pills flex-column flex-sm-row sticky-top justify-content-around" >
+
+
+            <li class="nav-item">
+                <a class="nav-link text-sm-center flex-sm p-3 mb-2 text-white nav-bar-text-user" href="/">Аэропорты</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-sm-center flex-sm p-3 mb-2 text-white nav-bar-text-user" href="#" role="button" aria-haspopup="true" aria-expanded="false">В пути</a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link text-sm-center flex-sm p-3 mb-2 text-white nav-bar-text-user" href="#">-</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<h3 class="text-center">
+    <span>Самолёты аэропорта</span>
+    <span th:text="${airport_id}"></span>
+</h3>
+
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col">Id</th>
+        <th scope="col">Название самолёта</th>
+        <th scope="col">Местоположение</th>
+    </tr>
+    </thead>
+    <tbody>
+    <th:block th:each="plane : ${planes}">
+        <tr>
+            <th scope="row" th:text="${plane.id}"></th>
+            <td th:text="${plane.name}"></td>
+            <td th:text="${plane.location.name}"></td>
+        </tr>
+    </th:block>
+
+    </tbody>
+</table>
+
+<form class="col-4" action="#" th:action="@{/addPlane}" th:object="${plane}" method="post">
+    <div class="form-group">
+        <label for="inputName">Название Самолёта</label>
+        <input type="text" class="form-control" id="inputName" placeholder="Name" th:field="*{name}">
+    </div>
+    <button type="submit" class="btn btn-primary">Добавить</button>
+</form>
+
+</body>
+</html>
