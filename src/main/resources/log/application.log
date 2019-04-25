@@ -33,3 +33,4 @@
 2019-04-25 23:42:28 INFO  [http-nio-8080-exec-1]: Удаление Flight по id = 39
 2019-04-25 23:42:32 INFO  [http-nio-8080-exec-2]: Удаление Flight по id = 15
 2019-04-25 23:42:32 INFO  [http-nio-8080-exec-3]: Удаление Flight по id = 39
+2019-04-25 23:43:51 INFO  [http-nio-8080-exec-3]: Удаление Flight по id = 38
