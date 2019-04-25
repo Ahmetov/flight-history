@@ -8,9 +8,8 @@ import proj.ahmetov.entities.Airport;
 import proj.ahmetov.entities.Flight;
 import proj.ahmetov.entities.FlightTime;
 import proj.ahmetov.entities.Plane;
-import proj.ahmetov.service.AirportService;
-import proj.ahmetov.service.FlightService;
-import proj.ahmetov.service.PlaneService;
+import proj.ahmetov.service.*;
+
 import java.util.List;
 
 /**
@@ -20,15 +19,15 @@ import java.util.List;
 public class FlightController {
     /** Сервис для Flight */
     @Autowired
-    FlightService flightService;
+    FlightServiceInterface flightService;
 
     /** Сервис для Airport */
     @Autowired
-    AirportService airportService;
+    AirportServiceInterface airportService;
 
     /** Сервис для Plane */
     @Autowired
-    PlaneService planeService;
+    PlaneServiceInterface planeService;
 
     /** id текущего самолёта */
     private String id;

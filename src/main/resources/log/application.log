@@ -45,3 +45,14 @@
 2019-04-25 23:50:12 INFO  [http-nio-8080-exec-4]: Удаление Flight по id = 16
 2019-04-25 23:50:12 INFO  [http-nio-8080-exec-5]: Удаление Flight по id = 40
 2019-04-25 23:50:17 INFO  [http-nio-8080-exec-6]: Удаление Plane по id = 40
+2019-04-26 00:27:59 INFO  [http-nio-8080-exec-2]: Удаление Airport по id = 8
+2019-04-26 00:28:05 INFO  [http-nio-8080-exec-5]: Добавляется Airport
+2019-04-26 00:28:11 INFO  [http-nio-8080-exec-6]: Добавляется Airport
+2019-04-26 00:28:29 INFO  [http-nio-8080-exec-1]: Добавляется Airport
+2019-04-26 00:34:25 INFO  [http-nio-8080-exec-3]: Получение Airport по id = 2
+2019-04-26 00:34:25 INFO  [http-nio-8080-exec-3]: Добавляется Plane
+2019-04-26 00:34:27 INFO  [http-nio-8080-exec-5]: Удаление Flight по id = 41
+2019-04-26 00:34:36 INFO  [http-nio-8080-exec-7]: Получение Plane по id = 41
+2019-04-26 00:34:36 INFO  [http-nio-8080-exec-7]: Добавляется Flight
+2019-04-26 00:34:37 INFO  [http-nio-8080-exec-8]: Удаление Flight по id = 41
+2019-04-26 00:34:39 INFO  [http-nio-8080-exec-9]: Удаление Flight по id = 41

@@ -11,7 +11,7 @@ import java.util.List;
 /** Репозиторий для хранения полётов */
 @Repository("flightDao")
 @Transactional
-public class FlightDao {
+public class FlightDao implements FlightDaoInterface{
     /** Управление сущностями */
     @PersistenceContext
     private EntityManager entityManager;
@@ -23,6 +23,7 @@ public class FlightDao {
      * Получить Flight по id
      * @param id - id полёта
      */
+    @Override
     public List<Flight> getFlightsById(Long id){
         loger.info("Удаление Flight по id = " + id.toString());
         return entityManager.createQuery("from Flight f where f.plane.id = :id")
@@ -34,6 +35,7 @@ public class FlightDao {
      * Удалить Flight по id
      * @param id - id аэропорта
      */
+    @Override
     public void deleteFlightById(Long id){
         loger.info("Удаление Flight по id = " + id.toString());
         entityManager.createQuery("delete from Flight a where a.id = :id")
@@ -45,6 +47,7 @@ public class FlightDao {
      * Добавить Flight в базу данных
      * @param flight - Flight для добавления
      */
+    @Override
     public void addFlight(Flight flight){
         loger.info("Добавляется Flight");
         entityManager.persist(flight);

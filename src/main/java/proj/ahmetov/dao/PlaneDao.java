@@ -12,7 +12,7 @@ import java.util.List;
 /** Репозиторий для хранения самолётов */
 @Repository("planeDao")
 @Transactional
-public class PlaneDao {
+public class PlaneDao implements  PlaneDaoInterface{
     /** Управление сущностями */
     @PersistenceContext
     private EntityManager entityManager;
@@ -24,6 +24,7 @@ public class PlaneDao {
      * Получить Plane по id
      * @param id - id самолёта
      */
+    @Override
     public Plane getPlaneById(Long id){
         loger.info("Получение Plane по id = " + id.toString());
         return (Plane) entityManager.createQuery("from Plane p where p.id = :id")
@@ -35,6 +36,7 @@ public class PlaneDao {
      * Удалить Plane по id
      * @param id - id аэропорта
      */
+    @Override
     public void deletePlaneById(Long id){
         loger.info("Удаление Plane по id = " + id.toString());
         entityManager.createQuery("delete from Plane p where p.id = :id")
@@ -45,6 +47,7 @@ public class PlaneDao {
     /**
      * Получить список всех Plane
      */
+    @Override
     public List<Plane> getPlanesByAirportId(Long id){
         return entityManager.createQuery("from Plane p where p.location.id = :id")
                 .setParameter("id",id)
@@ -55,6 +58,7 @@ public class PlaneDao {
      * Добавить Plane в базу данных
      * @param plane - Plane для добавления
      */
+    @Override
     public void addPlane(Plane plane){
         loger.info("Добавляется Plane");
         entityManager.persist(plane);

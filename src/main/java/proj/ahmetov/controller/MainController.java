@@ -5,8 +5,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import proj.ahmetov.entities.Airport;
-import proj.ahmetov.service.AirportService;
-import proj.ahmetov.service.PlaneService;
+import proj.ahmetov.service.AirportServiceInterface;
+import proj.ahmetov.service.PlaneServiceInterface;
+
 import java.util.List;
 
 /**
@@ -17,11 +18,11 @@ public class MainController {
 
     /** Сервис для Airport */
     @Autowired
-    private AirportService airportService;
+    private AirportServiceInterface airportService;
 
     /** Сервис для Plane */
     @Autowired
-    private PlaneService planeService;
+    private PlaneServiceInterface planeService;
 
     /** Контроллер главной страницы
      *  */
