@@ -6,31 +6,40 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import proj.ahmetov.entities.Airport;
 import proj.ahmetov.entities.Flight;
+import proj.ahmetov.entities.FlightTime;
 import proj.ahmetov.entities.Plane;
 import proj.ahmetov.service.AirportService;
 import proj.ahmetov.service.FlightService;
 import proj.ahmetov.service.PlaneService;
-
 import java.util.List;
 
+/**
+ * Контроллер для класса Flight
+ */
 @Controller
 public class FlightController {
+    /** Сервис для Flight */
     @Autowired
     FlightService flightService;
 
+    /** Сервис для Airport */
     @Autowired
     AirportService airportService;
 
+    /** Сервис для Plane */
     @Autowired
     PlaneService planeService;
 
+    /** id текущего самолёта */
     private String id;
 
+    /** Контроллер для страницы flights
+     * @param id - id текущего самолёта
+     * @param model - модель страницы
+     *  */
     @RequestMapping(value = "/flights", method = RequestMethod.GET)
     public String getPlanesByAirportId(@RequestParam(name = "id") String id, Model model){
-
         this.id = id;
-
         Flight flight = new Flight();
         flight.setStartPoint(new Airport());
         flight.setEndPoint(new Airport());
@@ -40,47 +49,35 @@ public class FlightController {
         model.addAttribute("airports",airList);
 
         List<Flight> list = flightService.getFlightsByPlaneId(id);
-
         for(Flight f : list)
         {
             System.out.println(f.getStartPoint().getName());
         }
 
-
-
         model.addAttribute("plane_id",id);
         model.addAttribute("flights",list);
-
-
-
-//        Plane plane = new Plane();
-//
-//        model.addAttribute("plane",plane);
-//
-//        List<Plane> list = planeService.getPlanesByAirportId(id);
-//
-//        model.addAttribute("airport_id",id);
-//        model.addAttribute("planes",list);
-
         return "flights";
     }
 
+    /**
+     * Контроллер удаления Flight из базы данных
+     * @param id - id Flight для удаления
+     *  */
+    @RequestMapping(value = "deleteFlight/{id}", method = RequestMethod.GET)
+    public String deleteFlight(@PathVariable String id){
+        flightService.deleteFlightById(id);
+        return "redirect:/flights?id=" + this.id;
+    }
 
+    /** Контроллер добавления flight в базу данных
+     * @param flight - flight для добавления в базу данных
+     *  */
     @PostMapping("addFlight")
     public String addFlight(@ModelAttribute Flight flight){
-
-        System.out.println("start id: " + flight.getStartPoint().getId() + " end id: " +
-                flight.getEndPoint().getId());
         Plane plane = planeService.getPlaneById(id);
         flight.setPlane(plane);
-
-        System.out.println("plane id: " + plane.getId());
-
-        //System.out.println();
-
+        flight.setFlightTime(new FlightTime(flight.getStartTime(),flight.getEndTime()));
         flightService.addFlight(flight);
-
-
         return "redirect:flights?id=" + id;
     }
 }

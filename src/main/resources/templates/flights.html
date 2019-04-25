@@ -14,13 +14,7 @@
             <li class="nav-item">
                 <a class="nav-link text-sm-center flex-sm p-3 mb-2 text-white nav-bar-text-user" href="/">Аэропорты</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link text-sm-center flex-sm p-3 mb-2 text-white nav-bar-text-user" href="#" role="button" aria-haspopup="true" aria-expanded="false">В пути</a>
-            </li>
 
-            <li class="nav-item">
-                <a class="nav-link text-sm-center flex-sm p-3 mb-2 text-white nav-bar-text-user" href="#">-</a>
-            </li>
         </ul>
     </div>
 </nav>
@@ -49,6 +43,13 @@
             <td th:text="${flight.getEndPoint().getName()}"></td>
             <td th:text="${flight.startTime}"></td>
             <td th:text="${flight.endTime}"></td>
+            <td th:text="${flight.flightTime}"></td>
+            <td>
+                <form action="#" th:action="@{/deleteFlight}" th:object="${flight}" method="post">
+                    <input type="hidden" th:field="${flight.flightNumber}"/>
+                    <a th:href="@{'/deleteFlight/' + ${flight.flightNumber}}" class="btn btn-danger">Delete</a>
+                </form>
+            </td>
         </tr>
     </th:block>
 
@@ -57,33 +58,58 @@
 
 
 
-<form class="col-4" action="#" th:action="@{/addFlight}" th:object="${flight}" method="post">
-    <!--<div class="form-group">-->
-        <!--<label for="inputStartTime">Время взлёта</label>-->
-        <!--<input type="datetime-local" class="form-control" id="inputStartTime" placeholder="Name" th:field="*{startTime}">-->
-    <!--</div>-->
-    <!--<div class="form-group">-->
-        <!--<label for="inputStartTime">Время посадки</label>-->
-        <!--<input type="datetime-local" class="form-control" id="inputEndTime" placeholder="Name" th:field="*{endTime}">-->
-    <!--</div>-->
-    <div class="form-group">
-        <label for="inputStartPoint">Место взлёта</label>
-    <select class="form-control" id="inputStartPoint" th:field="*{startPoint.id}">
-        <th:block th:each="airport : ${airports}">
-            <option th:text="${airport.name}" th:value="${airport.id}"></option>
-        </th:block>
-    </select>
+<div class="accordion" id="accordionExample">
+
+    <div class="card">
+        <div class="card-header" id="headingOne">
+            <h5 class="mb-0">
+                <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                    <b style="font-size: 20px; color: black;" >Добавить полёт</b>
+                </button>
+            </h5>
+        </div>
+
+        <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+
+            <div class="card text-white bg-dark" >
+                <br/>
+                <form class="col-4" action="#" th:action="@{/addFlight}" th:object="${flight}" method="post">
+                    <div class="form-group">
+                    <label for="inputStartTime">Время взлёта</label>
+                    <input type="datetime-local" class="form-control" id="inputStartTime" placeholder="Name" th:field="*{startTime}">
+                    </div>
+                    <div class="form-group">
+                    <label for="inputStartTime">Время посадки</label>
+                    <input type="datetime-local" class="form-control" id="inputEndTime" placeholder="Name" th:field="*{endTime}">
+                    </div>
+                    <div class="form-group">
+                        <label for="inputStartPoint">Место взлёта</label>
+                        <select class="form-control" id="inputStartPoint" th:field="*{startPoint.id}">
+                            <th:block th:each="airport : ${airports}">
+                                <option th:text="${airport.name}" th:value="${airport.id}"></option>
+                            </th:block>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputStartPoint">Место посадки</label>
+                        <select class="form-control" id="inputEndPoint" th:field="*{endPoint.id}">
+                            <th:block th:each="airport : ${airports}">
+                                <option th:text="${airport.name}" th:value="${airport.id}"></option>
+                            </th:block>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Добавить</button>
+                </form>
+                <br/>
+            </div>
+
+        </div>
     </div>
-    <div class="form-group">
-        <label for="inputStartPoint">Место посадки</label>
-        <select class="form-control" id="inputEndPoint" th:field="*{endPoint.id}">
-            <th:block th:each="airport : ${airports}">
-                <option th:text="${airport.name}" th:value="${airport.id}"></option>
-            </th:block>
-        </select>
-    </div>
-    <button type="submit" class="btn btn-primary">Добавить</button>
-</form>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
 </body>
 </html>

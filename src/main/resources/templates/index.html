@@ -15,13 +15,7 @@
                 <li class="nav-item">
                     <a class="nav-link text-sm-center flex-sm p-3 mb-2 text-white nav-bar-text-user" href="/">Аэропорты</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link text-sm-center flex-sm p-3 mb-2 text-white nav-bar-text-user" href="#" role="button" aria-haspopup="true" aria-expanded="false">В пути</a>
-                </li>
 
-                <li class="nav-item">
-                    <a class="nav-link text-sm-center flex-sm p-3 mb-2 text-white nav-bar-text-user" href="#">-</a>
-                </li>
             </ul>
         </div>
     </nav>
@@ -52,7 +46,6 @@
                 <form action="#" th:action="@{/deleteAirport}" th:object="${airport}" method="post">
                     <input type="hidden" th:field="${airport.id}"/>
                     <a th:href="@{'/deleteAirport/' + ${airport.id}}" class="btn btn-danger">Delete</a>
-                    <!--<button type="submit" class="btn btn-danger">del</button>-->
                 </form>
             </td>
         </tr>
@@ -62,28 +55,48 @@
     </table>
     <br/>
 
-    <h4 class="text-center">Добавить аэропорт</h4>
-    <br/>
+    <br/><br/>
 
-    <form class="col-4" action="#" th:action="@{/addAirport}" th:object="${airport}" method="post">
-        <div class="form-group">
-            <label for="inputName">Название Аэропорта</label>
-            <input type="text" class="form-control" id="inputName" placeholder="Name" th:field="*{name}">
+    <div class="accordion" id="accordionExample">
+
+        <div class="card">
+            <div class="card-header" id="headingOne">
+                <h5 class="mb-0">
+                    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        <b style="font-size: 20px; color: black;" >Добавить аэропорт</b>
+                    </button>
+                </h5>
+            </div>
+
+            <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+
+                <div class="card text-white bg-dark mb-3" >
+                    <br/>
+                    <form class="col-4" action="#" th:action="@{/addAirport}" th:object="${airport}" method="post">
+                        <div class="form-group">
+                            <label for="inputName">Название Аэропорта</label>
+                            <input type="text" class="form-control" id="inputName" placeholder="Name" th:field="*{name}">
+                        </div>
+                        <div class="form-group">
+                            <label for="inputCity">Местоположение</label>
+                            <input type="text" class="form-control" id="inputCity" placeholder="Location" th:field="*{city}">
+                        </div>
+                        <div class="form-group">
+                            <label for="inputIata">ИАТА</label>
+                            <input type="text" class="form-control" id="inputIata" placeholder="IATA" th:field="*{codeIata}">
+                        </div>
+                        <div class="form-group">
+                            <label for="inputIkao">ИКАО</label>
+                            <input type="text" class="form-control" id="inputIkao" placeholder="IKAO" th:field="*{codeIkao}">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Добавить</button>
+                    </form>
+                    <br/>
+                </div>
+
+            </div>
         </div>
-        <div class="form-group">
-            <label for="inputCity">Местоположение</label>
-            <input type="text" class="form-control" id="inputCity" placeholder="Location" th:field="*{city}">
-        </div>
-        <div class="form-group">
-            <label for="inputIata">ИАТА</label>
-            <input type="text" class="form-control" id="inputIata" placeholder="IATA" th:field="*{codeIata}">
-        </div>
-        <div class="form-group">
-            <label for="inputIkao">ИКАО</label>
-            <input type="text" class="form-control" id="inputIkao" placeholder="IKAO" th:field="*{codeIkao}">
-        </div>
-        <button type="submit" class="btn btn-primary">Добавить</button>
-    </form>
+    </div>
 
     <br/>
     <br/>

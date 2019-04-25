@@ -7,11 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import proj.ahmetov.entities.Airport;
 import proj.ahmetov.service.AirportService;
 import proj.ahmetov.service.PlaneService;
-
-
-
 import java.util.List;
-
 
 /**
  * Контроллер для класса Airport
@@ -31,12 +27,8 @@ public class MainController {
      *  */
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String getAllAirports(Model model){
-
         model.addAttribute("airport",new Airport());
-
         List<Airport> list = airportService.getAll();
-
-
         model.addAttribute("airports",list);
         return "index";
     }
@@ -47,9 +39,8 @@ public class MainController {
      *  */
     @RequestMapping(value = "deleteAirport/{id}", method = RequestMethod.GET)
     public String deleteAirport(@PathVariable String id){
-
         System.out.println("delete id = " + id );
-
+        airportService.deleteAirportById(id);
         return "redirect:/";
     }
 
@@ -59,19 +50,7 @@ public class MainController {
      *  */
     @PostMapping("addAirport")
     public String addAirport(@ModelAttribute Airport airport){
-        System.out.println(
-                airport.getId() + "\n" +
-                        airport.getCity() + "\n" +
-                        airport.getCodeIata() + "\n" +
-                        airport.getCodeIkao() + "\n"
-        );
-
         airportService.addAirport(airport);
-
         return "redirect:/";
     }
-
-
-
-
 }

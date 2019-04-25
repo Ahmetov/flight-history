@@ -30,7 +30,7 @@ public class Flight {
     private Airport startPoint;
 
     /** Поле Конец маршрута */
-    @OneToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+    @OneToOne(cascade = {CascadeType.MERGE, CascadeType.REMOVE}, fetch = FetchType.EAGER)
     @JoinColumn(name = "end_point_id", referencedColumnName = "id")
     private Airport endPoint;
 

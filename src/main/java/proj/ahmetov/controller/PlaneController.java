@@ -23,37 +23,44 @@ public class PlaneController {
     @Autowired
     private AirportService airportService;
 
-    /** id текущего самолёта */
+    /** id текущего аэропорта */
     private String id;
 
-    /** Контроллер главной страницы
+    /** Контроллер для страницы planes
+     * @param id - id текущего аэропорта
+     * @param model - модель страницы
      *  */
     @RequestMapping(value = "/planes", method = RequestMethod.GET)
     public String getPlanesByAirportId(@RequestParam(name = "id") String id, Model model){
         this.id = id;
 
         Plane plane = new Plane();
-
         model.addAttribute("plane",plane);
 
         List<Plane> list = planeService.getPlanesByAirportId(id);
-
         model.addAttribute("airport_id",id);
         model.addAttribute("planes",list);
         return "planes";
     }
 
+    /**
+     * Контроллер удаления Plane из базы данных
+     * @param id - id Plane для удаления
+     *  */
+    @RequestMapping(value = "deletePlane/{id}", method = RequestMethod.GET)
+    public String deletePlane(@PathVariable String id){
+        planeService.deletePlaneById(id);
+        return "redirect:/planes?id=" + this.id;
+    }
 
-
-
+    /** Контроллер для добавления plane
+     * @param plane - plane для добавления в базу данных
+     *  */
     @PostMapping("addPlane")
     public String addPlane(@ModelAttribute Plane plane){
-
         Airport locationAirport = airportService.getAirportById(id);
         plane.setLocation(locationAirport);
-
         planeService.addPlane(plane);
-
         return "redirect:planes?id=" + id;
     }
 }
