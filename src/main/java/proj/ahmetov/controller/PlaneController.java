@@ -10,24 +10,29 @@ import proj.ahmetov.service.AirportService;
 import proj.ahmetov.service.PlaneService;
 
 import java.util.List;
-
+/**
+ * Контроллер для класса Plane
+ */
 @Controller
 public class PlaneController {
+
+    /** Сервис для Plane */
     @Autowired
     private PlaneService planeService;
+    /** Сервис для Airport */
     @Autowired
     private AirportService airportService;
 
+    /** id текущего самолёта */
     private String id;
 
+    /** Контроллер главной страницы
+     *  */
     @RequestMapping(value = "/planes", method = RequestMethod.GET)
     public String getPlanesByAirportId(@RequestParam(name = "id") String id, Model model){
         this.id = id;
 
         Plane plane = new Plane();
-
-
-        //System.out.println("new Plane: " + plane.getName() + "\n" + plane.getLocation().getId() + "\n");
 
         model.addAttribute("plane",plane);
 
@@ -35,9 +40,10 @@ public class PlaneController {
 
         model.addAttribute("airport_id",id);
         model.addAttribute("planes",list);
-
         return "planes";
     }
+
+
 
 
     @PostMapping("addPlane")

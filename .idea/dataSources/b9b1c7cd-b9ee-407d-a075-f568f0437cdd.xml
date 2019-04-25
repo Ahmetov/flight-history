@@ -78,8 +78,8 @@
       <ObjectId>2200</ObjectId>
       <Comment>standard public schema</Comment>
       <Owner>postgres</Owner>
-      <IntrospectionTimestamp>2019-04-24.16:37:43.892</IntrospectionTimestamp>
-      <IntrospectionStateNumber>604</IntrospectionStateNumber>
+      <IntrospectionTimestamp>2019-04-25.19:33:25.799</IntrospectionTimestamp>
+      <IntrospectionStateNumber>636</IntrospectionStateNumber>
       <Current>1</Current>
       <Visible>1</Visible>
     </schema>
@@ -177,7 +177,7 @@
     <table id="28" parent="15" name="flight">
       <ObjectId>24595</ObjectId>
       <Owner>postgres</Owner>
-      <StateNumber>585</StateNumber>
+      <StateNumber>636</StateNumber>
     </table>
     <table id="29" parent="15" name="flight_time">
       <ObjectId>24603</ObjectId>
@@ -187,7 +187,7 @@
     <table id="30" parent="15" name="plane">
       <ObjectId>24587</ObjectId>
       <Owner>postgres</Owner>
-      <StateNumber>604</StateNumber>
+      <StateNumber>636</StateNumber>
     </table>
     <column id="31" parent="27" name="id">
       <Position>1</Position>
@@ -337,13 +337,15 @@
       <RefColNames>id</RefColNames>
     </foreign-key>
     <foreign-key id="54" parent="28" name="flight_plane_id_fkey">
-      <ObjectId>32788</ObjectId>
+      <ObjectId>49152</ObjectId>
       <ColNames>plane_id</ColNames>
       <RefTableId>24587</RefTableId>
       <RefColPositions>1</RefColPositions>
       <RefTableName>plane</RefTableName>
       <RefKeyName>plane_pkey</RefKeyName>
       <RefColNames>id</RefColNames>
+      <OnDelete>cascade</OnDelete>
+      <OnUpdate>cascade</OnUpdate>
     </foreign-key>
     <column id="55" parent="29" name="id">
       <Position>1</Position>

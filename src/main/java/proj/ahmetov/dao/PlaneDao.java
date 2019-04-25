@@ -15,6 +15,12 @@ public class PlaneDao {
     @PersistenceContext
     private EntityManager entityManager;
 
+    public Plane getPlaneById(Long id){
+        return (Plane) entityManager.createQuery("from Plane p where p.id = :id")
+                .setParameter("id",id)
+                .getSingleResult();
+    }
+
     public List<Plane> getPlanesByAirportId(Long id){
         return entityManager.createQuery("from Plane p where p.location.id = :id")
                 .setParameter("id",id)
@@ -22,7 +28,6 @@ public class PlaneDao {
     }
 
     public void addPlane(Plane plane){
-//        System.out.println("persist: " + plane.getLocation().getId() + "\n");
         entityManager.persist(plane);
         entityManager.flush();
     }

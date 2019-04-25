@@ -1,10 +1,89 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Flights</title>
+    <title>Planes</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"/>
 </head>
 <body>
+<nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #63B174">
+    <div class="collapse navbar-collapse" id="navbar1">
+        <ul class="nav nav-pills flex-column flex-sm-row sticky-top justify-content-around" >
+
+
+            <li class="nav-item">
+                <a class="nav-link text-sm-center flex-sm p-3 mb-2 text-white nav-bar-text-user" href="/">Аэропорты</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-sm-center flex-sm p-3 mb-2 text-white nav-bar-text-user" href="#" role="button" aria-haspopup="true" aria-expanded="false">В пути</a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link text-sm-center flex-sm p-3 mb-2 text-white nav-bar-text-user" href="#">-</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<h3 class="text-center">
+    <span>Полёты самолёта </span>
+    <span th:text="${plane_id}"></span>
+</h3>
+
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col">Номер рейса</th>
+        <th scope="col">Место взлёта</th>
+        <th scope="col">Место посадки</th>
+        <th scope="col">Время взлёта</th>
+        <th scope="col">Время посадки</th>
+        <th scope="col">Время полёта</th>
+    </tr>
+    </thead>
+    <tbody>
+    <th:block th:each="flight : ${flights}">
+        <tr>
+            <th scope="row" th:text="${flight.flightNumber}"></th>
+            <td th:text="${flight.getStartPoint().getName()}"></td>
+            <td th:text="${flight.getEndPoint().getName()}"></td>
+            <td th:text="${flight.startTime}"></td>
+            <td th:text="${flight.endTime}"></td>
+        </tr>
+    </th:block>
+
+    </tbody>
+</table>
+
+
+
+<form class="col-4" action="#" th:action="@{/addFlight}" th:object="${flight}" method="post">
+    <!--<div class="form-group">-->
+        <!--<label for="inputStartTime">Время взлёта</label>-->
+        <!--<input type="datetime-local" class="form-control" id="inputStartTime" placeholder="Name" th:field="*{startTime}">-->
+    <!--</div>-->
+    <!--<div class="form-group">-->
+        <!--<label for="inputStartTime">Время посадки</label>-->
+        <!--<input type="datetime-local" class="form-control" id="inputEndTime" placeholder="Name" th:field="*{endTime}">-->
+    <!--</div>-->
+    <div class="form-group">
+        <label for="inputStartPoint">Место взлёта</label>
+    <select class="form-control" id="inputStartPoint" th:field="*{startPoint.id}">
+        <th:block th:each="airport : ${airports}">
+            <option th:text="${airport.name}" th:value="${airport.id}"></option>
+        </th:block>
+    </select>
+    </div>
+    <div class="form-group">
+        <label for="inputStartPoint">Место посадки</label>
+        <select class="form-control" id="inputEndPoint" th:field="*{endPoint.id}">
+            <th:block th:each="airport : ${airports}">
+                <option th:text="${airport.name}" th:value="${airport.id}"></option>
+            </th:block>
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Добавить</button>
+</form>
 
 </body>
 </html>

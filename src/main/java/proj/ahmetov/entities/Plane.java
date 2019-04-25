@@ -27,7 +27,7 @@ public class Plane {
 
     /** Полёты */
 
-    @OneToMany(mappedBy = "plane", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "plane", fetch = FetchType.EAGER, cascade = CascadeType.ALL) //cascade all
     private Set<Flight> flights = new HashSet<>();
 
     public Plane(){

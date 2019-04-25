@@ -36,6 +36,7 @@
         <th scope="col">Id</th>
         <th scope="col">Название самолёта</th>
         <th scope="col">Местоположение</th>
+        <th scope="col">Полёты</th>
     </tr>
     </thead>
     <tbody>
@@ -43,7 +44,10 @@
         <tr>
             <th scope="row" th:text="${plane.id}"></th>
             <td th:text="${plane.name}"></td>
-            <td th:text="${plane.location.name}"></td>
+            <td th:text="${plane.location.city}"></td>
+            <td>
+                <a th:href="@{'/flights?id=' + ${plane.id}}">Полёты</a>
+            </td>
         </tr>
     </th:block>
 

@@ -12,6 +12,11 @@ public class PlaneService {
     @Autowired
     private PlaneDao planetDao;
 
+    public Plane getPlaneById(String id){
+        Long parsedId = Long.parseLong(id);
+        return planetDao.getPlaneById(parsedId);
+    }
+
     public List<Plane> getPlanesByAirportId(String id){
         Long parsedId = Long.parseLong(id);
         return planetDao.getPlanesByAirportId(parsedId);

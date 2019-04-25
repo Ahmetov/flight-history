@@ -1,5 +1,7 @@
 package proj.ahmetov.entities;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
@@ -15,29 +17,31 @@ public class Flight {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "flight_number")
-    private int flightNumber;
+    private Long flightNumber;
 
     /** Поле самолёт */
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "plane_id")
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "plane_id", referencedColumnName = "id")
     private Plane plane;
 
     /** Поле Начало маршрута */
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "start_point_id")
+    @OneToOne(cascade = {CascadeType.MERGE, CascadeType.REMOVE}, fetch = FetchType.EAGER)
+    @JoinColumn(name = "start_point_id", referencedColumnName = "id")
     private Airport startPoint;
 
     /** Поле Конец маршрута */
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "end_point_id")
+    @OneToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+    @JoinColumn(name = "end_point_id", referencedColumnName = "id")
     private Airport endPoint;
 
     /** Время взлёта */
     @Column(name = "start_time")
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     private LocalDateTime startTime;
 
     /** Время посадки */
     @Column(name = "end_time")
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     private LocalDateTime endTime;
 
     /** Время полёта */
@@ -72,7 +76,7 @@ public class Flight {
         this.plane = plane;
     }
 
-    public int getFlightNumber() {
+    public Long getFlightNumber() {
         return flightNumber;
     }
 
@@ -116,7 +120,7 @@ public class Flight {
         this.flightTime = flightTime;
     }
 
-    public void setFlightNumber(int flightNumber) {
+    public void setFlightNumber(Long flightNumber) {
         this.flightNumber = flightNumber;
     }
 
